@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Login.scss';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { login, user } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -15,11 +26,29 @@ const Login = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    setError('');
+    console.log('Form submitted');
+
+    try {
+      const result = await login(formData.email, formData.password);
+      console.log('Login result:', result);
+
+      if (result?.success && result?.user) {
+        console.log('Login successful with user data:', result.user);
+        navigate('/dashboard', { replace: true });
+      } else {
+        console.log('Login failed:', result?.message);
+        setError(result?.message || 'Invalid email or password');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('An error occurred during login. Please try again.');
+    }
   };
 
   return (
@@ -34,6 +63,8 @@ const Login = () => {
           <h1 className="login-title">Welcome Back to StudyConnect</h1>
           <p className="login-subtitle">Connect. Collaborate. Grow.</p>
         </div>
+
+        {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="input-group">
@@ -106,7 +137,7 @@ const Login = () => {
         </form>
 
         <div className="login-footer">
-          Don't have an account? <a href="#" className="signup-link">Sign Up</a>
+          Don't have an account? <Link to="/signup" className="signup-link">Sign Up</Link>
         </div>
       </div>
     </div>
@@ -114,3 +145,4 @@ const Login = () => {
 };
 
 export default Login;
+    

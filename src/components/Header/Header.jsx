@@ -1,23 +1,26 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Header.scss';
 
 const Header = () => {
+  const location = useLocation();
+  
   return (
     <header className="header">
       <div className="header__left">
-        <div className="header__logo">
+        <Link to="/dashboard" className="header__logo">
           <svg className="header__logo-icon" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24">
             <path d="m12 14 4-4"></path>
             <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
           </svg>
           <h2 className="header__logo-text">StudyGroup</h2>
-        </div>
+        </Link>
         <nav className="header__nav">
-          <a href="#" className="header__nav-link">Home</a>
-          <a href="#" className="header__nav-link">Groups</a>
-          <a href="#" className="header__nav-link header__nav-link--active">Meetings</a>
-          <a href="#" className="header__nav-link">Calendar</a>
-          <a href="#" className="header__nav-link">Resources</a>
+          <Link to="/dashboard" className={`header__nav-link ${location.pathname === '/dashboard' ? 'header__nav-link--active' : ''}`}>Home</Link>
+          <Link to="/groups" className={`header__nav-link ${location.pathname === '/groups' ? 'header__nav-link--active' : ''}`}>Groups</Link>
+          <Link to="/meetings" className={`header__nav-link ${location.pathname === '/meetings' ? 'header__nav-link--active' : ''}`}>Meetings</Link>
+          <Link to="/summaries" className={`header__nav-link ${location.pathname === '/summaries' ? 'header__nav-link--active' : ''}`}>Summaries</Link>
+          <Link to="/resources" className={`header__nav-link ${location.pathname === '/resources' ? 'header__nav-link--active' : ''}`}>Resources</Link>
         </nav>
       </div>
       <div className="header__right">

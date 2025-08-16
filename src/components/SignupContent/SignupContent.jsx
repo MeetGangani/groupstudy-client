@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './SignupContent.scss';
 
 const SignupContent = () => {
+  const navigate = useNavigate();
+  const { register, user } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -13,18 +18,62 @@ const SignupContent = () => {
     termsAgreed: false
   });
 
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
+
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
+    setError('');
   };
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return false;
+    }
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return false;
+    }
+    if (!formData.termsAgreed) {
+      setError('Please agree to the Terms of Service');
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    setError('');
+
+    if (!validateForm()) {
+      return;
+    }
+
+    try {
+      const userData = {
+        name: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role
+      };
+
+      const result = await register(userData);
+      if (result.success) {
+        navigate('/dashboard');
+      } else {
+        setError(result.message || 'Registration failed');
+      }
+    } catch (err) {
+      setError('An error occurred during registration');
+    }
   };
 
   const togglePasswordVisibility = (field) => {
@@ -245,9 +294,11 @@ const SignupContent = () => {
                 </div>
               </div>
 
+              {error && <div className="signup-content__error">{error}</div>}
+              
               {/* Login Link */}
               <p className="signup-content__login-link">
-                Already have an account? <a href="#" className="signup-content__link">Log in</a>
+                Already have an account? <Link to="/login" className="signup-content__link">Log in</Link>
               </p>
             </div>
           </div>
