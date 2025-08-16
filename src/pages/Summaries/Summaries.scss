@@ -1,0 +1,20 @@
+:root {
+    --brand-primary: #3661ec;
+    --brand-secondary: #f0f1f4;
+    --text-primary: #111318;
+    --text-secondary: #616b89;
+    --background-primary: #ffffff;
+    --background-secondary: #f7f8fc;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .summaries {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--background-secondary);
+  }
+  

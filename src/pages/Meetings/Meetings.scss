@@ -1,0 +1,191 @@
+:root {
+    --bg: #f8f9fc;
+    --text: #0e121b;
+    --muted: #4e6797;
+    --ring: #e7ebf3;
+    --border: #d0d7e7;
+    --brand: #2767e7;
+    --white: #ffffff;
+  }
+  
+  * { box-sizing: border-box; }
+  
+  .mt-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background: var(--bg);
+    font-family: Inter, "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color: var(--text);
+  }
+  
+  .mt-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 960px; /* max-w-[960px] */
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px; /* px-40 */
+  }
+  
+  /* Toolbar */
+  .mt-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px; /* gap-3 */
+    padding: 16px; /* p-4 */
+  }
+  
+  .mt-title {
+    color: var(--text);
+    font-size: 32px; /* text-[32px] */
+    font-weight: 700;
+    line-height: 1.1; /* leading-tight */
+    min-width: 18rem; /* min-w-72 */
+    margin: 0;
+  }
+  
+  .mt-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: none;
+    border-radius: 12px; /* rounded-xl */
+    height: 32px; /* h-8 default; override where needed */
+    padding: 0 16px; /* px-4 */
+    font-size: 14px; /* text-sm */
+    cursor: pointer;
+  
+    &--note {
+      min-width: 84px;
+      max-width: 480px;
+      background: var(--ring);
+      color: var(--text);
+      font-weight: 500; /* medium */
+    }
+  
+    &--primary {
+      height: 40px; /* h-10 */
+      background: var(--brand);
+      color: var(--bg);
+      font-weight: 700; /* bold */
+      letter-spacing: 0.015em;
+    }
+  
+    &--neutral {
+      height: 40px;
+      background: var(--ring);
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 0.015em;
+    }
+  
+    &--icon {
+      gap: 8px; /* gap-2 */
+      padding-left: 16px; /* pl-4 */
+      padding-right: 16px; /* px-4 */
+  
+      .mt-btn__icon {
+        display: inline-flex;
+        color: var(--text);
+      }
+    }
+  
+    &--chip {
+      height: 32px;
+      background: var(--ring);
+      color: var(--text);
+      font-weight: 500;
+      width: fit-content;
+    }
+  }
+  
+  /* Rows */
+  .mt-row {
+    display: flex;
+    justify-content: stretch;
+  
+    &--pad {
+      padding: 12px 16px; /* px-4 py-3 */
+    }
+  }
+  
+  .mt-actions {
+    display: flex;
+    flex: 1;
+    gap: 12px; /* gap-3 */
+    flex-wrap: wrap;
+    padding: 12px 16px; /* px-4 py-3 */
+    justify-content: flex-start;
+  }
+  
+  /* Section heading */
+  .mt-h2 {
+    color: var(--text);
+    font-size: 22px; /* text-[22px] */
+    font-weight: 700; /* font-bold */
+    letter-spacing: -0.015em;
+    padding: 20px 16px 12px 16px; /* px-4 pb-3 pt-5 */
+    margin: 0;
+  }
+  
+  /* Cards */
+  .mt-card-pad { padding: 16px; } /* p-4 */
+  
+  .mt-card {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 16px; /* gap-4 */
+    border-radius: 12px; /* rounded-xl */
+  }
+  
+  .mt-card__text {
+    display: flex;
+    flex: 2 2 0px;
+    flex-direction: column;
+    gap: 16px; /* gap-4 */
+  }
+  
+  .mt-when {
+    color: var(--muted);
+    font-size: 14px; /* text-sm */
+    margin: 0;
+  }
+  
+  .mt-title-sm {
+    color: var(--text);
+    font-size: 16px; /* text-base */
+    font-weight: 700; /* font-bold */
+    line-height: 1.1; /* leading-tight */
+    margin: 0;
+  }
+  
+  .mt-meta {
+    color: var(--muted);
+    font-size: 14px; /* text-sm */
+    margin: 0;
+  }
+  
+  .mt-card__img {
+    flex: 1 1 0px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 12px; /* rounded-xl */
+    aspect-ratio: 16 / 9; /* aspect-video */
+  }
+  
+  /* Responsive container padding */
+  @media (max-width: 1024px) {
+    .mt-container { padding: 0 24px; }
+  }
+  @media (max-width: 640px) {
+    .mt-container { padding: 0 16px; }
+    .mt-toolbar { padding: 12px; }
+    .mt-actions { padding: 12px; }
+    .mt-row--pad { padding: 8px 12px; }
+  }
+  

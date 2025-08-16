@@ -1,0 +1,33 @@
+:root {
+    --primary-color: #3661ec;
+    --secondary-color: #f0f1f4;
+    --text-primary: #111318;
+    --text-secondary: #616b89;
+    --border-color: #e5e7eb;
+    --background-color: #f9fafb;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+  }
+  
+  .resources {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: var(--background-color);
+  }
+  
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
