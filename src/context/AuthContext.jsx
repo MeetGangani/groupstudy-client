@@ -86,13 +86,31 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await fetch('http://localhost:5000/api/auth/logout', {
-        method: 'GET',
-        credentials: 'include',
-      });
+      // First clear the user state
       setUser(null);
+      
+      // Then make the request to the server
+      const response = await fetch('http://localhost:5000/api/auth/logout', {
+        method: 'GET', // Changed back to GET as your backend might be expecting GET
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      // If the request fails, we don't need to parse JSON or check success
+      // Just clearing the user state is enough for frontend logout
+      if (!response.ok) {
+        console.log('Logout request failed, but user state was cleared');
+      }
+
+      // Return true to indicate successful logout from frontend perspective
+      return true;
     } catch (error) {
       console.error('Logout failed:', error);
+      // Even if the server request fails, we've already cleared the user state
+      // so from the frontend perspective, the user is logged out
+      return true;
     }
   };
 

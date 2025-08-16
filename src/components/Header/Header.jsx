@@ -1,9 +1,13 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Header.scss';
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+  const [showDropdown, setShowDropdown] = useState(false);
   
   return (
     <header className="header">
@@ -37,12 +41,44 @@ const Header = () => {
             <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
           </svg>
         </button>
-        <div 
-          className="header__avatar" 
-          style={{
-            backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCDn6laUoG5FI5sixAkp1l3FZdMsCQAo5xTaOPawe0RSK4UJr8tfSFJf9sOQiYU3oxMq-3mPaeBwe9IPKLVw_eAWe3AwPIvFVXZ615CZjLFBbh2BCxUhyPHdT51Ltmu1vFXpWJD2rLiEdxJQnURsSzMx2wECuiCfa-1l5E7_9AxeNWWhXK-YfKsdezPWagT29S8aZhUKyaEpWQvgZ_oWUWSlxFCPjhm00JT-Zcv3NAHsLwDMXsLJrwfupVdcN3Q3NrWt9Vs7__ywk8h")'
-          }}
-        ></div>
+        <div className="header__profile">
+          <button 
+            className="header__avatar" 
+            onClick={() => setShowDropdown(!showDropdown)}
+            style={{
+              backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCDn6laUoG5FI5sixAkp1l3FZdMsCQAo5xTaOPawe0RSK4UJr8tfSFJf9sOQiYU3oxMq-3mPaeBwe9IPKLVw_eAWe3AwPIvFVXZ615CZjLFBbh2BCxUhyPHdT51Ltmu1vFXpWJD2rLiEdxJQnURsSzMx2wECuiCfa-1l5E7_9AxeNWWhXK-YfKsdezPWagT29S8aZhUKyaEpWQvgZ_oWUWSlxFCPjhm00JT-Zcv3NAHsLwDMXsLJrwfupVdcN3Q3NrWt9Vs7__ywk8h")'
+            }}
+          ></button>
+          {showDropdown && (
+            <div className="header__dropdown">
+              <div className="header__dropdown-header">
+                <div className="header__dropdown-avatar"
+                  style={{
+                    backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCDn6laUoG5FI5sixAkp1l3FZdMsCQAo5xTaOPawe0RSK4UJr8tfSFJf9sOQiYU3oxMq-3mPaeBwe9IPKLVw_eAWe3AwPIvFVXZ615CZjLFBbh2BCxUhyPHdT51Ltmu1vFXpWJD2rLiEdxJQnURsSzMx2wECuiCfa-1l5E7_9AxeNWWhXK-YfKsdezPWagT29S8aZhUKyaEpWQvgZ_oWUWSlxFCPjhm00JT-Zcv3NAHsLwDMXsLJrwfupVdcN3Q3NrWt9Vs7__ywk8h")'
+                  }}
+                ></div>
+                <div className="header__dropdown-info">
+                  <h4 className="header__dropdown-name">Sarah Johnson</h4>
+                  <p className="header__dropdown-email">sarah.j@example.com</p>
+                </div>
+              </div>
+              <div className="header__dropdown-divider"></div>
+              <button 
+                className="header__dropdown-item" 
+                onClick={() => {
+                  // Call logout and navigate regardless of server response
+                  logout();
+                  navigate('/login', { replace: true });
+                }}
+              >
+                <svg className="header__dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
