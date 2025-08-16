@@ -2,8 +2,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import './App.css'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
-import Summary from './pages/Summary/Summary'
-import Meetings from './pages/Meetings/Meetings'
 import Groups from './pages/Groups/Groups'
 import MeetingsPage from './pages/MeetingsPage/MeetingsPage'
 import Summaries from './pages/Summaries/Summaries'
@@ -38,14 +36,15 @@ const Root = () => {
           <Dashboard />
         </ProtectedRoute>
       } />
-      <Route path="/summary" element={
+      {/* <Route path="/summary" element={
         <ProtectedRoute>
           <Summary />
         </ProtectedRoute>
-      } />
+      } /> */}
       <Route path="/meetings" element={
         <ProtectedRoute>
           <MeetingsPage />
+          {/* <Meetings/> */}
         </ProtectedRoute>
       } />
       <Route path="/groups" element={

@@ -44,10 +44,10 @@
     &__heading {
       font-size: 1.875rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: #111827;
       margin: 0;
     }
-  
+
     // Buttons
     &__btn {
       display: flex;
@@ -63,17 +63,17 @@
       transition: all 0.3s ease;
   
       &--primary {
-        background-color: var(--brand-primary);
+        background-color: #4f46e5;
         color: white;
   
         &:hover {
-          background-color: #1d4ed8;
+          background-color: #4338ca;
         }
       }
   
       &--secondary {
-        background-color: var(--brand-secondary);
-        color: var(--text-primary);
+        background-color: #f3f4f6;
+        color: #111827;
   
         &:hover {
           background-color: #e5e7eb;
@@ -115,12 +115,13 @@
   
       &-icon {
         position: absolute;
-        inset-y: 0;
-        left: 0;
-        padding-left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0.75rem;
         display: flex;
         align-items: center;
         pointer-events: none;
+        color: #9ca3af;
       }
   
       &-input {
@@ -152,8 +153,8 @@
       transition: all 0.2s ease;
   
       &:focus {
-        border-color: var(--brand-primary);
-        box-shadow: 0 0 0 1px var(--brand-primary);
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 1px #4f46e5;
       }
     }
   
@@ -192,14 +193,14 @@
   
       &-date {
         font-size: 0.875rem;
-        color: var(--text-secondary);
+        color: #6b7280;
         margin: 0 0 0.25rem 0;
       }
   
       &-title {
         font-weight: 700;
         font-size: 1.125rem;
-        color: var(--text-primary);
+        color: #111827;
         margin: 0 0 0.5rem 0;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -208,7 +209,7 @@
   
       &-participants {
         font-size: 0.875rem;
-        color: var(--text-secondary);
+        color: #6b7280;
         margin: 0 0 1rem 0;
       }
   
@@ -261,7 +262,7 @@
     &__modal-title {
       font-size: 1.25rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: #111827;
       margin: 0;
     }
   
@@ -289,7 +290,7 @@
   
       p {
         font-size: 0.875rem;
-        color: var(--text-secondary);
+        color: #6b7280;
         margin: 0.25rem 0;
       }
     }
@@ -304,7 +305,7 @@
       h4 {
         font-weight: 600;
         margin: 1.5rem 0 0.5rem 0;
-        color: var(--text-primary);
+        color: #111827;
       }
     }
   

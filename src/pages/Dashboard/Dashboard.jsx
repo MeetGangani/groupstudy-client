@@ -154,11 +154,13 @@ import React from 'react';
 import Header from '../../components/Header/Header'; // Import your existing header
 import DashboardContent from '../DashboardContent/DashboardContent';
 import './Dashboard.scss';
+import Navbar from '../../components/Navbar/Navbar';
 
 const Dashboard = () => {
   return (
     <div className="dashboard">
       <Header />
+      {/* <Navbar/> */}
       <DashboardContent />
     </div>
   );
